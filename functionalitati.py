@@ -1,29 +1,41 @@
 import os
 
-def print_menu():
-    clear()
-    print("menu")
-
-def get_command(msg=""):
-    return int(input(msg))
-
 def clear():
     os.system("cls")
 
-def add(building):
+def print_menu():
     clear()
-    nr_apartament = int(input("Introduceti numarul apartamentului\n>>>"))
+    menu_text = """Lista Comenzi:
+    1. Adauga
+    2. Sterge
+    3. Cauta
+    4. Raport
+    5. Filtreaza
+    6. Undo
+    9. Exit\n"""
+    print(menu_text)
+
+
+def get_command():
+    return int(input(">>> "))
+
+
+def get_numeric_input(msg=""):
     clear()
-    optiune = int(input("1-adauga cheltuiala\n2-modifica cheltuiala\n>>>"))
-    match optiune:
-        case 1:
-            clear()
-            tip = input("Introduceti tipul cheltuielii(apa, canal, ...)\n>>>")
-            clear()
-            suma = int(input("Introduceti suma cheltuielii\n>>>"))
-            building[nr_apartament] = building.get(nr_apartament, {})
-            building[nr_apartament][tip] = suma
-            clear()
-            input(f"{building}\nCheltuiala adaugata cu succes(Press Enter to to continue)")
-        case 2: pass
-        case _: pass
+    try:
+        return int(input(f"{msg}\n>>> "))
+    except ValueError:
+        print("Input invalid, incearca sa introduci un numar")
+        return -1
+
+
+def get_text_input(msg=""):
+    clear()
+    return input(f"{msg}\n>>> ")
+
+
+def exists(building, number):
+    for apartment in building:
+        if apartment.getApartmentNumber() == number:
+            return True
+    return False
