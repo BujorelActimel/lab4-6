@@ -28,3 +28,6 @@ class Apartament:
         for cost in self.costs:
             total_sum += self.costs[cost]
         return total_sum
+
+    def getCost(self, cost_type):
+        return self.costs[cost_type]
