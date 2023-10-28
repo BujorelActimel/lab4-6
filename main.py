@@ -2,6 +2,7 @@ from functionalitati import *
 from apartament import Apartament
 
 # TODO:
+
 # 1. refactor the main.py functionalities
 # (move the logic implementation to functionalitati.py)
 # 2. implement undo
