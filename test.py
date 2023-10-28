@@ -2,6 +2,14 @@ from functionalitati import *
 from apartament import Apartament
 import pytest
 
+def test_exists():
+    test_building = [Apartament(0), Apartament(1), Apartament(10)]
+    assert exists(test_building, 0)
+    assert exists(test_building, 1)
+    assert exists(test_building, 10)
+    assert not exists(test_building, 7)
+
+
 def test_addCost():
     test_apartm = Apartament(0)
     test_apartm.addCost("apa", 100)
@@ -54,3 +62,20 @@ def test_totalCosts():
 
     test_apartment.deleteAllCosts()
     assert test_apartment.totalCosts() == 0
+
+
+def test_delete_from_range():
+    test_ap1 = Apartament(1)
+    test_ap2 = Apartament(2)
+    test_ap3 = Apartament(3)
+
+    test_ap1.addCost("apa", 100)
+    test_ap2.addCost("apa", 100)
+    test_ap3.addCost("apa", 100)
+
+    test_building = [test_ap1, test_ap2, test_ap3]
+    delete_from_range(test_building, 2, 10)
+
+    assert test_building[0].costs == {"apa": 100}
+    assert test_building[1].costs == {}
+    assert test_building[2].costs == {}
