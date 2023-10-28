@@ -17,16 +17,15 @@ def print_menu():
 
 
 def get_command():
-    return int(input(">>> "))
+    try:
+        return int(input(">>> "))
+    except:
+        pass
 
 
 def get_numeric_input(msg=""):
     clear()
-    try:
-        return int(input(f"{msg}\n>>> "))
-    except ValueError:
-        print("Input invalid, incearca sa introduci un numar")
-        return -1
+    return int(input(f"{msg}\n>>> "))
 
 
 def get_text_input(msg=""):
@@ -39,3 +38,16 @@ def exists(building, number):
         if apartment.getApartmentNumber() == number:
             return True
     return False
+
+
+def get_apartment(building, number):
+    for apartment in building:
+        if apartment.getApartmentNumber() == number:
+            return apartment
+
+
+def delete_from_range(building, first_ap, last_ap):
+    for ap_number in range(first_ap, last_ap + 1):
+        if exists(building, ap_number):
+            apartment = get_apartment(building, ap_number)
+            apartment.deleteAllCosts()
