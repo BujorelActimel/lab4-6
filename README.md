@@ -26,4 +26,4 @@ Creați o aplicație pentru gestiunea cheltuielilor lunare de la apartamentele u
     + Elimină toate cheltuielile mai mici decât o sumă dată
 
 6. **Undo**
-    - Reface ultima operație (lista de cheltuieli revine la ce exista înainte de ultima operație care a modificat lista). – Nu folosiți funcția deepCopy
+    + Reface ultima operație (lista de cheltuieli revine la ce exista înainte de ultima operație care a modificat lista). – Nu folosiți funcția deepCopy
