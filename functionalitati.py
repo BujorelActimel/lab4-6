@@ -51,3 +51,10 @@ def delete_from_range(building, first_ap, last_ap):
         if exists(building, ap_number):
             apartment = get_apartment(building, ap_number)
             apartment.deleteAllCosts()
+
+
+def undo(states, building):
+    if states:
+        return states.pop()
+    else:
+        return []

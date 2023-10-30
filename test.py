@@ -79,3 +79,28 @@ def test_delete_from_range():
     assert test_building[0].costs == {"apa": 100}
     assert test_building[1].costs == {}
     assert test_building[2].costs == {}
+
+
+def test_undo():
+    ap1 = Apartament(1)
+    ap2 = Apartament(2)
+    ap3 = Apartament(3)
+    ap1.addCost("apa", 100)
+    ap2.addCost("canal", 200)
+    ap3.addCost("intretinere", 280)
+
+    prev_states = [[ap1], [ap1, ap2]]
+    
+    current_building = [ap1, ap2, ap3]
+
+    current_building = undo(prev_states, current_building)
+
+    assert current_building == [ap1, ap2]
+
+    current_building = undo(prev_states, current_building)
+
+    assert current_building == [ap1]
+
+    current_building = undo(prev_states, current_building)
+
+    assert current_building == []

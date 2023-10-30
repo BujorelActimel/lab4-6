@@ -31,3 +31,8 @@ class Apartament:
 
     def getCost(self, cost_type):
         return self.costs[cost_type]
+    
+    def copy(self):
+        new_apartment = Apartament(self.number)
+        new_apartment.costs = dict(self.costs)
+        return new_apartment

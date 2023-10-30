@@ -2,19 +2,21 @@ from functionalitati import *
 from apartament import Apartament
 
 # TODO:
-
 # 1. refactor the main.py functionalities
 # (move the logic implementation to functionalitati.py)
-# 2. implement undo
-# 3. implement final 3 mini-functionalities
+# 2. implement final 3 mini-functionalities
+# 3. add a GUI
 
 def main():
     building = []
+    previous_states = []
     while True:
         print_menu()
         command = get_command()
         match command:
             case 1:
+                previous_states.append([apartment.copy() for apartment in building])
+
                 apartment_number = get_numeric_input("Numar Apartament: ")
                 if not exists(building, apartment_number):
                     apartment = Apartament(apartment_number)
@@ -36,6 +38,8 @@ def main():
                 input(f"{apartment}\nPress Enter to continue ")
 
             case 2:
+                previous_states.append([apartment.copy() for apartment in building])
+
                 apartment_number = get_text_input("Numar Apartament: ")
                 try:
                     apartment_number = int(apartment_number)
@@ -95,6 +99,8 @@ def main():
                     input("Press Enter to continue ")
 
             case 5:
+                previous_states.append([apartment.copy() for apartment in building])
+
                 cost_type = get_text_input("Tip cheltuiala/suma: ")
                 try:
                     cost_ammount = int(cost_type)
@@ -113,7 +119,9 @@ def main():
                         for cost in costs_to_delete:
                             apartment.deleteCost(cost)
 
-            case 6: pass
+            case 6: 
+                building = undo(previous_states, building)
+                input("Undo Completed Sucsesfully!\nPress Enter to continue ")
 
             case 7:
                 clear()
