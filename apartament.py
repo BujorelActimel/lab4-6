@@ -11,8 +11,17 @@ class Apartament:
     def getApartmentNumber(self):
         return self.number
 
-    def addCost(self, type, cost):
-        self.costs[type] = cost
+    def addCost(self, cost_type, cost):
+        if cost_type in self.costs:
+            input(f"Exista deja o cheltuiala la {cost_type}")
+            return
+        self.costs[cost_type] = cost
+
+    def modifyCost(self, cost_type, cost):
+        if cost_type in self.costs:
+            self.costs[cost_type] = cost
+        else:
+            input(f"Nu exista cheltuieli la {cost_type}")
 
     def deleteAllCosts(self):
         self.costs = {}
@@ -30,7 +39,10 @@ class Apartament:
         return total_sum
 
     def getCost(self, cost_type):
-        return self.costs[cost_type]
+        try:
+            return self.costs[cost_type]
+        except KeyError:
+            return 0
     
     def copy(self):
         new_apartment = Apartament(self.number)
