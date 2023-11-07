@@ -17,15 +17,20 @@ def print_menu():
 
 
 def get_command():
-    try:
-        return int(input(">>> "))
-    except:
-        pass
+    while True:
+        try:
+            return int(input(">>> "))
+        except:
+            print("Wrong Input, incearca sa introduci un numar")
 
 
 def get_numeric_input(msg=""):
-    clear()
-    return int(input(f"{msg}\n>>> "))
+    while True:
+        clear()
+        try:
+            return int(input(f"{msg}\n>>> "))
+        except ValueError:
+            input("wrong Input, incearca sa introduci un numar\nPress Enter to continue")
 
 
 def get_text_input(msg=""):

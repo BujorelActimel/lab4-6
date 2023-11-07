@@ -2,8 +2,8 @@ from functionalitati import *
 from ui import *
 
 # TODO:
-# 1. implement last functionality of 'search_costs'
-# 2. add a GUI
+#     1. even more testing
+#     2. add a GUI
 
 def main():
     building = []
@@ -16,21 +16,31 @@ def main():
                 save_state(building, previous_states)
 
                 option = get_numeric_input("1 - Adaugati cheltuiala\n2 - Modificati cheltuiala")
-                ap_number = get_numeric_input("Numar Apartament")
-                if not exists(building, ap_number):
-                    building.append(Apartament(ap_number))
-
-                apartment = get_apartment(building, ap_number)
-                cost_type = get_text_input("Tipul cheltuielii")
 
                 if option == 1:
+                    ap_number = get_numeric_input("Numar Apartament")
+                    apartment = get_apartment(building, ap_number)
+                    if not exists(building, apartment):
+                        building.append(apartment)
+                    cost_type = get_text_input("Tipul cheltuielii")
+                    if cost_type in apartment.costs:
+                        input(f"Exista deja o cheltuiala la {cost_type}\nPress Enter to continue")
+                        continue
                     cost_ammount = get_numeric_input("Suma cheltuielii")
                     apartment.addCost(cost_type, cost_ammount)
+                    input("Adaugare Completa\nPress Enter to continue")
                 elif option == 2:
+                    ap_number = get_numeric_input("Numar Apartament")
+                    apartment = get_apartment(building, ap_number)
+                    cost_type = get_text_input("Tipul cheltuielii")
+                    if cost_type not in apartment.costs:
+                        input(f"Nu exista o cheltuiala la {cost_type}\nPress Enter to continue")
+                        continue
                     cost_ammount = get_numeric_input("Noua suma a cheltuielii")
                     apartment.modifyCost(cost_type, cost_ammount)
+                    input("Modificare Completa\nPress Enter to continue")
                 else:
-                    input("invalid")
+                    input("invalid\nPress Enter to continue")
 
             case 2:
                 save_state(building, previous_states)
@@ -75,7 +85,7 @@ def main():
 
                 input("Filtrare Completa\nPress Enter to continue")
 
-            case 6: 
+            case 6:
                 building = undo(previous_states, building)
                 input("Undo Completed Sucsesfully!\nPress Enter to continue ")
 
@@ -83,6 +93,8 @@ def main():
                 clear()
                 for apartment in building:
                     print(apartment)
+                    for cost_type in apartment.costs_dates:
+                        print(apartment.getDate(cost_type))
                 input("Press Enter to continue ")
 
             case 9:

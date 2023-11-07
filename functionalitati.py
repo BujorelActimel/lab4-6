@@ -1,5 +1,6 @@
 from ui import *
 from apartament import Apartament
+from datetime import date
 
 
 def exists(building, number):
@@ -52,8 +53,14 @@ def search_costs(building):
                 print(f"Apartamentul {apartment.number}: {apartment.costs[cost_type]}")
     
     elif option == 3:
-        pass
-    
+        cost_ammount = get_numeric_input("Suma")
+        cost_date = date(get_numeric_input("Anul"), get_numeric_input("Luna"), get_numeric_input("Ziua"))
+        for apartment in building:
+            print(f"Apartamentul {apartment.number}:")
+            for cost in apartment.costs:
+                if apartment.getCost(cost) > cost_ammount and apartment.getDate(cost) < cost_date:
+                    print(f"{apartment.getCost(cost)}, {apartment.getDate(cost)}")
+
     else:
         input("invalid\nPress Enter to continue")
         return
